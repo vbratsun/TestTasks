@@ -15,32 +15,12 @@ namespace WordSorter
         public static void Main()
         {
             App = ApplicationManager.GetInstance();
-
-            var plainData = GetData();
-
-        }
-
-        private static InputData GetData()
-        {
-            var userInputData = new InputData();
-
-            Console.WriteLine("Введите количество слов для сортировки:");
-            userInputData.WordsQuantity = Convert.ToInt16(Console.ReadLine());
-
-            Console.WriteLine("Введите слова для сортировки через пробел:");
-            userInputData.WordsUnsorted = Console.ReadLine();
-
-            return userInputData;
-        }
-
-        private static OutputData SortData(InputData inputData)
-        {
-            return null;
-        }
-
-        private static OutputData PerformData(OutputData outputData)
-        {
-            return null;
+            
+            //var plainData = App.DataHelper.GetData();
+            var plainData = App.DataHelper.GetStubData();
+            var preparedInputData = App.DataHelper.GetPreparedInputData(plainData);
+            var sortedData = App.DataHelper.GetSortedData(preparedInputData);
+            App.DataHelper.PerformData(sortedData);
         }
     }
 }

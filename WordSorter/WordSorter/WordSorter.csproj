@@ -43,6 +43,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppManager\ApplicationManager.cs" />
+    <Compile Include="Helpers\DataHelper.cs" />
+    <Compile Include="Model\Data.cs" />
     <Compile Include="Model\InputData.cs" />
     <Compile Include="Model\OutputData.cs" />
     <Compile Include="WordSorter.cs" />

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using WordSorter.Helpers;
 
 namespace WordSorter.AppManager
 {
@@ -7,8 +8,12 @@ namespace WordSorter.AppManager
     {
         private static readonly ThreadLocal<ApplicationManager> App = new ThreadLocal<ApplicationManager>();
 
+        private readonly Lazy<DataHelper> _dataHelper;
+        public DataHelper DataHelper => _dataHelper.Value;
+
         private ApplicationManager()
         {
+            _dataHelper = new Lazy<DataHelper>(()=>new DataHelper(this));
         }
 
         ~ApplicationManager()

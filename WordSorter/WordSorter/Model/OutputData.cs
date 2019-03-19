@@ -1,7 +1,7 @@
 ﻿namespace WordSorter.Model
 {
-    public class OutputData
+    public class OutputData : Data
     {
-        public string[] WordsSorted { get; set; }
+        public string[] SortedWords { get; set; }
     }
 }
