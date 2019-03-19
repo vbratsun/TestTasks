@@ -2,7 +2,7 @@
 {
     public class InputData
     {
-        public int WordQuantity { get; set; }
+        public int WordsQuantity { get; set; }
 
         public string WordsUnsorted { get; set; }
     }

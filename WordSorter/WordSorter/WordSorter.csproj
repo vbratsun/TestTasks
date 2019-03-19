@@ -42,9 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppManager\ApplicationManager.cs" />
     <Compile Include="Model\InputData.cs" />
     <Compile Include="Model\OutputData.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="WordSorter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
