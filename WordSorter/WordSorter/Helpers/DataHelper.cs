@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WordSorter.AppManager;
+using WordSorter.Extensions;
 using WordSorter.Model;
 
 namespace WordSorter.Helpers
@@ -21,7 +20,7 @@ namespace WordSorter.Helpers
         {
             return new InputData
             {
-                NumberOfWords = 5,
+                Quantity = 5,
                 PlainWords = "Кашалот Катафалк Шар Трактор Яблоко"
             };
         }
@@ -31,7 +30,7 @@ namespace WordSorter.Helpers
             var userInputData = new InputData();
 
             Console.WriteLine("Введите количество слов для сортировки:");
-            userInputData.NumberOfWords = Convert.ToInt16(Console.ReadLine());
+            userInputData.Quantity = Convert.ToInt16(Console.ReadLine());
 
             Console.WriteLine("Введите слова для сортировки через пробел:");
             userInputData.PlainWords = Console.ReadLine();
@@ -44,10 +43,23 @@ namespace WordSorter.Helpers
             var filledInData = new InputData
             {
                 PlainWords = inputData.PlainWords,
-                NumberOfWords = inputData.NumberOfWords
+                Quantity = inputData.Quantity,
+                WordItems = new List<Word>()
             };
 
-            filledInData.UnsortedWords = inputData.PlainWords.Split(delimiter).ToArray();
+            var incomingWords = inputData.PlainWords.Split(delimiter).ToList();
+
+            foreach (var item in incomingWords)
+            {
+                var word = new Word
+                {
+                    Value = item,
+                    Length = item.Length,
+                    Vowels = item.GetVowelsQuantity()
+                };
+
+                filledInData.WordItems.Add(word);
+            }
 
             return filledInData;
         }
@@ -56,11 +68,10 @@ namespace WordSorter.Helpers
         {
             var sortedData = new OutputData
             {
-                NumberOfWords = inputData.NumberOfWords,
-                UnsortedWords = inputData.UnsortedWords
+                Quantity = inputData.Quantity
             };
 
-            sortedData.SortedWords = SortWords(inputData.UnsortedWords);
+            //sortedData.SortedWords = SortWords(inputData.UnsortedWords);
 
             return sortedData;
         }

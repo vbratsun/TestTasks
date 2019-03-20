@@ -43,10 +43,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppManager\ApplicationManager.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Helpers\DataHelper.cs" />
-    <Compile Include="Model\Data.cs" />
+    <Compile Include="Model\Words.cs" />
     <Compile Include="Model\InputData.cs" />
     <Compile Include="Model\OutputData.cs" />
+    <Compile Include="Model\Word.cs" />
     <Compile Include="WordSorter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

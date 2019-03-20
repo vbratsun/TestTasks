@@ -1,6 +1,6 @@
 ﻿namespace WordSorter.Model
 {
-    public class InputData : Data
+    public class InputData : Words
     {
         public string PlainWords { get; set; }
     }
