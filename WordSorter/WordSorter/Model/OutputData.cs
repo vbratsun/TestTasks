@@ -1,7 +1,9 @@
-﻿namespace WordSorter.Model
+﻿using System.Collections.Generic;
+
+namespace WordSorter.Model
 {
     public class OutputData : Words
     {
-        public string[] SortedWords { get; set; }
+        public List<string> SortedWords { get; set; }
     }
 }

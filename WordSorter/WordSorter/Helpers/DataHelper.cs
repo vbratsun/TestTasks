@@ -68,27 +68,29 @@ namespace WordSorter.Helpers
         {
             var sortedData = new OutputData
             {
-                Quantity = inputData.Quantity
+                Quantity = inputData.Quantity,
+                WordItems = inputData.WordItems
             };
 
-            //sortedData.SortedWords = SortWords(inputData.UnsortedWords);
+            sortedData.SortedWords = SortWords(inputData.WordItems);
 
             return sortedData;
         }
 
-        private string[] SortWords(string[] words)
+        private List<string> SortWords(List<Word> words)
         {
-            var unsortedWords = words;
-            var sortedWords = new[] { String.Empty, };
+            var sortedWords = new List<Word>();
 
-            return sortedWords;
+            sortedWords.AddRange(words.OrderByDescending(w => w.Vowels));
+
+            return sortedWords.Select(word => word.Value).ToList();
         }
 
 
 
         public void PerformData(OutputData outputData)
         {
-            Console.WriteLine("Вывод:\n");
+            Console.WriteLine("Вывод:");
             foreach (var word in outputData.SortedWords)
             {
                 Console.WriteLine(word);
