@@ -81,12 +81,10 @@ namespace WordSorter.Helpers
         {
             var sortedWords = new List<Word>();
 
-            sortedWords.AddRange(words.OrderByDescending(w => w.Vowels));
+            sortedWords.AddRange(words.OrderByDescending(w => w.Vowels).ThenByDescending(w => w.Length));
 
             return sortedWords.Select(word => word.Value).ToList();
         }
-
-
 
         public void PerformData(OutputData outputData)
         {

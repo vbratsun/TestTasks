@@ -15,9 +15,10 @@ namespace WordSorter
         public static void Main()
         {
             App = ApplicationManager.GetInstance();
-            
-            //var plainData = App.DataHelper.GetData();
+
             var plainData = App.DataHelper.GetStubData();
+            //var plainData = App.DataHelper.GetData();
+
             var preparedInputData = App.DataHelper.GetPreparedInputData(plainData);
             var sortedData = App.DataHelper.GetSortedData(preparedInputData);
             App.DataHelper.PerformData(sortedData);
