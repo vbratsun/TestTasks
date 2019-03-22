@@ -25,6 +25,15 @@ namespace WordSorter.Helpers
             };
         }
 
+        public InputData GetStubData3()
+        {
+            return new InputData
+            {
+                Quantity = 5,
+                PlainWords = "Огонь Стена Паровоз Земля Мяч"
+            };
+        }
+
         public InputData GetData()
         {
             var userInputData = new InputData();
@@ -72,9 +81,40 @@ namespace WordSorter.Helpers
                 WordItems = inputData.WordItems
             };
 
-            sortedData.SortedWords = SortWords(inputData.WordItems);
+            sortedData.SortedWords = SortWords(GetReversedWords(inputData.WordItems));
 
             return sortedData;
+        }
+
+        private List<Word> GetReversedWords(List<Word> words)
+        {
+            var tempCollection = new List<Word>();
+
+            foreach (var word in words)
+            {
+                tempCollection.Add(word);
+            }
+
+            var wordsWithSameParams = new List<Word>();
+
+            for (int i = 0; i < tempCollection.Count; i++)
+            {
+                var selection = tempCollection.Distinct()
+                        .Where(word => word.Length == tempCollection[i].Length && word.Vowels == tempCollection[i].Vowels).ToList();
+
+                foreach (var selected in selection)
+                {
+                    tempCollection.Remove(selected);
+                }
+
+                if (selection.Count > 1)
+                {
+                    wordsWithSameParams.AddRange(selection);
+                }
+            }
+            wordsWithSameParams.Reverse();
+            
+            return wordsWithSameParams.Union(words).ToList();
         }
 
         private List<string> SortWords(List<Word> words)

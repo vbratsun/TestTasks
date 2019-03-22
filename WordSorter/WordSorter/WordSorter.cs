@@ -16,7 +16,7 @@ namespace WordSorter
         {
             App = ApplicationManager.GetInstance();
 
-            var plainData = App.DataHelper.GetStubData();
+            var plainData = App.DataHelper.GetStubData3();
             //var plainData = App.DataHelper.GetData();
 
             var preparedInputData = App.DataHelper.GetPreparedInputData(plainData);
