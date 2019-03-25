@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using WordSorter.AppManager;
+using WordSorter.Extensions;
 using WordSorter.Model;
 
 namespace WordSorter.Helpers
@@ -10,7 +13,7 @@ namespace WordSorter.Helpers
 
         public InputHelper(ApplicationManager app)
         {
-            //_app = app;
+            _app = app;
         }
 
         public InputData GetStubData()
@@ -35,13 +38,52 @@ namespace WordSorter.Helpers
         {
             var userInputData = new InputData();
 
-            Console.WriteLine("Введите количество слов для сортировки:");
-            userInputData.Quantity = Convert.ToInt16(Console.ReadLine());
-
-            Console.WriteLine("Введите слова для сортировки через пробел:");
-            userInputData.PlainWords = Console.ReadLine();
+            userInputData.Quantity = GetQuantity();
+            userInputData.PlainWords = GetWords();
 
             return userInputData;
+        }
+
+        private int GetQuantity()
+        {
+            Console.WriteLine("Введите количество слов для сортировки:");
+            var quantity = Convert.ToInt16(Console.ReadLine());
+
+            return quantity;
+        }
+
+        private string GetWords()
+        {
+            Console.WriteLine("Введите слова для сортировки через пробел:");
+            var words = Console.ReadLine();
+
+            return words;
+        }
+
+        public InputData GetPreparedInputData(InputData inputData, char delimiter = ' ')
+        {
+            var filledInData = new InputData
+            {
+                PlainWords = inputData.PlainWords,
+                Quantity = inputData.Quantity,
+                WordItems = new List<Word>()
+            };
+
+            var incomingWords = inputData.PlainWords.Split(delimiter).ToList();
+
+            foreach (var item in incomingWords)
+            {
+                var word = new Word
+                {
+                    Value = item,
+                    Length = item.Length,
+                    Vowels = item.GetVowelsQuantity()
+                };
+
+                filledInData.WordItems.Add(word);
+            }
+
+            return filledInData;
         }
     }
 }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WordSorter.AppManager;
-using WordSorter.Model;
+﻿using WordSorter.AppManager;
 
 namespace WordSorter
 {
@@ -18,8 +12,7 @@ namespace WordSorter
 
             //var plainData = App.InputHelper.GetStubData3();
             var plainData = App.InputHelper.GetData();
-
-            var preparedInputData = App.DataHelper.GetPreparedInputData(plainData);
+            var preparedInputData = App.InputHelper.GetPreparedInputData(plainData);
             var sortedData = App.DataHelper.GetSortedData(preparedInputData);
             App.OutputHelper.PerformData(sortedData);
         }

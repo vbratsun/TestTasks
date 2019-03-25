@@ -10,7 +10,7 @@ namespace WordSorter.Helpers
 
         public OutputHelper(ApplicationManager app)
         {
-            //_app = app;
+            _app = app;
         }
 
         public void PerformData(OutputData outputData)

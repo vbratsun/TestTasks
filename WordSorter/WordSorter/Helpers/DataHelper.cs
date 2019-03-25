@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using WordSorter.AppManager;
-using WordSorter.Extensions;
 using WordSorter.Model;
 
 namespace WordSorter.Helpers
@@ -13,35 +11,9 @@ namespace WordSorter.Helpers
 
         public DataHelper(ApplicationManager app)
         {
-            //_app = app;
+            _app = app;
         }
-
-        public InputData GetPreparedInputData(InputData inputData, char delimiter = ' ')
-        {
-            var filledInData = new InputData
-            {
-                PlainWords = inputData.PlainWords,
-                Quantity = inputData.Quantity,
-                WordItems = new List<Word>()
-            };
-
-            var incomingWords = inputData.PlainWords.Split(delimiter).ToList();
-
-            foreach (var item in incomingWords)
-            {
-                var word = new Word
-                {
-                    Value = item,
-                    Length = item.Length,
-                    Vowels = item.GetVowelsQuantity()
-                };
-
-                filledInData.WordItems.Add(word);
-            }
-
-            return filledInData;
-        }
-
+        
         public OutputData GetSortedData(InputData inputData)
         {
             var sortedData = new OutputData
@@ -49,7 +21,6 @@ namespace WordSorter.Helpers
                 Quantity = inputData.Quantity,
                 WordItems = inputData.WordItems
             };
-
             sortedData.SortedWords = SortWords(GetReversedWords(inputData.WordItems));
 
             return sortedData;
@@ -89,7 +60,6 @@ namespace WordSorter.Helpers
         private List<string> SortWords(List<Word> words)
         {
             var sortedWords = new List<Word>();
-
             sortedWords.AddRange(words.OrderByDescending(w => w.Vowels).ThenByDescending(w => w.Length));
 
             return sortedWords.Select(word => word.Value).ToList();
