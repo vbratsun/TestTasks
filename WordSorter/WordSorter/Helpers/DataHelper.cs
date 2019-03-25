@@ -13,38 +13,7 @@ namespace WordSorter.Helpers
 
         public DataHelper(ApplicationManager app)
         {
-            _app = app;
-        }
-
-        public InputData GetStubData()
-        {
-            return new InputData
-            {
-                Quantity = 5,
-                PlainWords = "Кашалот Катафалк Шар Трактор Яблоко"
-            };
-        }
-
-        public InputData GetStubData3()
-        {
-            return new InputData
-            {
-                Quantity = 5,
-                PlainWords = "Огонь Стена Паровоз Земля Мяч"
-            };
-        }
-
-        public InputData GetData()
-        {
-            var userInputData = new InputData();
-
-            Console.WriteLine("Введите количество слов для сортировки:");
-            userInputData.Quantity = Convert.ToInt16(Console.ReadLine());
-
-            Console.WriteLine("Введите слова для сортировки через пробел:");
-            userInputData.PlainWords = Console.ReadLine();
-
-            return userInputData;
+            //_app = app;
         }
 
         public InputData GetPreparedInputData(InputData inputData, char delimiter = ' ')
@@ -124,15 +93,6 @@ namespace WordSorter.Helpers
             sortedWords.AddRange(words.OrderByDescending(w => w.Vowels).ThenByDescending(w => w.Length));
 
             return sortedWords.Select(word => word.Value).ToList();
-        }
-
-        public void PerformData(OutputData outputData)
-        {
-            Console.WriteLine("Вывод:");
-            foreach (var word in outputData.SortedWords)
-            {
-                Console.WriteLine(word);
-            }
         }
     }
 }

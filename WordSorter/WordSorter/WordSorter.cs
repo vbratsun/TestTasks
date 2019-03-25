@@ -16,12 +16,12 @@ namespace WordSorter
         {
             App = ApplicationManager.GetInstance();
 
-            var plainData = App.DataHelper.GetStubData3();
-            //var plainData = App.DataHelper.GetData();
+            //var plainData = App.InputHelper.GetStubData3();
+            var plainData = App.InputHelper.GetData();
 
             var preparedInputData = App.DataHelper.GetPreparedInputData(plainData);
             var sortedData = App.DataHelper.GetSortedData(preparedInputData);
-            App.DataHelper.PerformData(sortedData);
+            App.OutputHelper.PerformData(sortedData);
         }
     }
 }

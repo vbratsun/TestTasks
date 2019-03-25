@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 namespace WordSorter.Extensions
 {
@@ -8,6 +9,11 @@ namespace WordSorter.Extensions
         {
             const string vowels = "АЯОЁУЮЫИЭЕ";
 
+            if (string.IsNullOrEmpty(word))
+            {
+                throw new ArgumentException($"{nameof(word)} is null or empty!");
+            }
+            
             return word.Count(c => $"{vowels}{vowels.ToLower()}".Contains(c));
         }
     }

@@ -9,11 +9,14 @@ namespace WordSorter.AppManager
         private static readonly ThreadLocal<ApplicationManager> App = new ThreadLocal<ApplicationManager>();
 
         private readonly Lazy<DataHelper> _dataHelper;
-        public DataHelper DataHelper => _dataHelper.Value;
+        private readonly Lazy<InputHelper> _inputHelper;
+        private readonly Lazy<OutputHelper> _outputHelper;
 
         private ApplicationManager()
         {
-            _dataHelper = new Lazy<DataHelper>(()=>new DataHelper(this));
+            _dataHelper = new Lazy<DataHelper>(() => new DataHelper(this));
+            _inputHelper = new Lazy<InputHelper>(() => new InputHelper(this));
+            _outputHelper = new Lazy<OutputHelper>(() => new OutputHelper(this));
         }
 
         ~ApplicationManager()
@@ -29,5 +32,9 @@ namespace WordSorter.AppManager
             Console.WriteLine($"Return App {App.GetHashCode()} instance");
             return App.Value;
         }
+
+        public DataHelper DataHelper => _dataHelper.Value;
+        public InputHelper InputHelper => _inputHelper.Value;
+        public OutputHelper OutputHelper => _outputHelper.Value;
     }
 }
