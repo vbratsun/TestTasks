@@ -36,31 +36,60 @@ namespace WordSorter.Helpers
 
         public InputData GetData()
         {
-            var userInputData = new InputData();
+            var userInputData = new InputData
+            {
+                Quantity = GetQuantity(),
+                PlainWords = GetWords()
 
-            userInputData.Quantity = GetQuantity();
-            userInputData.PlainWords = GetWords();
+            };
+            
+            while (userInputData.Quantity != GetWordsList(userInputData.PlainWords).Count)
+            {
+                Console.WriteLine("Количество слов не совпадает с указанным!");
+                userInputData = new InputData
+                {
+                    Quantity = GetQuantity(),
+                    PlainWords = GetWords()
+
+                };
+            }
 
             return userInputData;
         }
 
         private int GetQuantity()
         {
-            Console.WriteLine("Введите количество слов для сортировки:");
-            var quantity = Convert.ToInt16(Console.ReadLine());
+            int quantity;
+            var input = string.Empty;
 
+            while (int.TryParse(input, out quantity) != true)
+            {
+                Console.WriteLine("Введите целочисленное количество слов для сортировки:");
+                input = Console.ReadLine();
+            }
+            
             return quantity;
         }
 
         private string GetWords()
         {
-            Console.WriteLine("Введите слова для сортировки через пробел:");
-            var words = Console.ReadLine();
+            var words = string.Empty;
+
+            while (string.IsNullOrEmpty(words))
+            {
+                Console.WriteLine("Введите слова для сортировки через пробел:");
+                words = Console.ReadLine();
+            }
 
             return words;
         }
 
-        public InputData GetPreparedInputData(InputData inputData, char delimiter = ' ')
+        private List<string> GetWordsList(string plainWords, char delimiter = ' ')
+        {
+            return plainWords.Split(delimiter).ToList();
+        }
+
+        public InputData GetPreparedInputData(InputData inputData)
         {
             var filledInData = new InputData
             {
@@ -69,9 +98,7 @@ namespace WordSorter.Helpers
                 WordItems = new List<Word>()
             };
 
-            var incomingWords = inputData.PlainWords.Split(delimiter).ToList();
-
-            foreach (var item in incomingWords)
+            foreach (var item in GetWordsList(filledInData.PlainWords))
             {
                 var word = new Word
                 {
