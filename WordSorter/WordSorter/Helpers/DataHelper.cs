@@ -7,13 +7,6 @@ namespace WordSorter.Helpers
 {
     public class DataHelper
     {
-        private ApplicationManager _app;
-
-        public DataHelper(ApplicationManager app)
-        {
-            _app = app;
-        }
-        
         public OutputData GetSortedData(InputData inputData)
         {
             var sortedData = new OutputData

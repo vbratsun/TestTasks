@@ -14,9 +14,9 @@ namespace WordSorter.AppManager
 
         private ApplicationManager()
         {
-            _dataHelper = new Lazy<DataHelper>(() => new DataHelper(this));
-            _inputHelper = new Lazy<InputHelper>(() => new InputHelper(this));
-            _outputHelper = new Lazy<OutputHelper>(() => new OutputHelper(this));
+            _dataHelper = new Lazy<DataHelper>(() => new DataHelper());
+            _inputHelper = new Lazy<InputHelper>(() => new InputHelper());
+            _outputHelper = new Lazy<OutputHelper>(() => new OutputHelper());
         }
 
         ~ApplicationManager()

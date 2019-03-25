@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using WordSorter.AppManager;
 using WordSorter.Extensions;
 using WordSorter.Model;
 
@@ -9,31 +8,6 @@ namespace WordSorter.Helpers
 {
     public class InputHelper
     {
-        private ApplicationManager _app;
-
-        public InputHelper(ApplicationManager app)
-        {
-            _app = app;
-        }
-
-        public InputData GetStubData()
-        {
-            return new InputData
-            {
-                Quantity = 5,
-                PlainWords = "Кашалот Катафалк Шар Трактор Яблоко"
-            };
-        }
-
-        public InputData GetStubData3()
-        {
-            return new InputData
-            {
-                Quantity = 5,
-                PlainWords = "Огонь Стена Паровоз Земля Мяч"
-            };
-        }
-
         public InputData GetData()
         {
             var userInputData = new InputData
@@ -50,7 +24,6 @@ namespace WordSorter.Helpers
                 {
                     Quantity = GetQuantity(),
                     PlainWords = GetWords()
-
                 };
             }
 
@@ -86,6 +59,11 @@ namespace WordSorter.Helpers
 
         private List<string> GetWordsList(string plainWords, char delimiter = ' ')
         {
+            if (string.IsNullOrEmpty(plainWords))
+            {
+                throw new ArgumentException($"{nameof(plainWords)} is null or empty!");
+            }
+
             return plainWords.Split(delimiter).ToList();
         }
 
